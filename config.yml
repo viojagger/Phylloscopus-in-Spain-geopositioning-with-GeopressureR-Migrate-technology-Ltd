@@ -1,0 +1,222 @@
+# Configuration file for GeoPressureR parameters
+#
+# This file stores all the parameters used by the GeoPressureR functions, following the best
+# practice to separate parameters from codes. These parameters are retrieved using config::get() of
+# the config R package <https://rstudio.github.io/config/>.
+#
+# This file is meant to be adapted based on your needs: feel free to add parameters either in the
+# default (applied to all tags) or for each tag seperatly (overwrite default). It is recommended to
+# specify all parameters used, even if you use the default value.
+#
+# You can check the documentation of each function to learn what each of these parameters are doing
+# as well as reading https://raphaelnussbaumer.com/GeoPressureManual/geopressuretemplate-workflow.html
+
+default:
+  tag_create: # ?tag_create()
+    # crop_start: NULL # Generally set at the tag level
+    # crop_end: NULL
+  tag_label: # ? tag_label()
+    warning_flight_duration: 2 # hours
+    warning_stap_duration: 6 # hours
+  tag_set_map: # ?tag_set_map()
+    extent: [-20, 25, 2, 45] # [W, E, S, N]
+    scale: 5 # 1 (min) -> 1° ; 2 -> 0.5° ; 5 -> 0.25° ; 10 (max) -> 0.1°
+    include_stap_id: NULL # default, take all
+    include_min_duration: 0 # in hours
+  geopressure_map: # ?geopressure_map()
+    max_sample: 250
+    margin: 20 # in m
+    sd: 1
+    thr_mask: 0.9
+    log_linear_pooling_weight: !expr \(n) log(n)/n
+  twilight_create: # ?twilight_create()
+    # twl_thr: NULL
+    # twl_offset: NULL # in hours /might need to change it to 1.4
+  geolight_map: # ?geolight_map()
+    twl_calib_adjust: 1.4
+    twl_llp: !expr \(n) log(n)/n
+  graph_create: # ?graph_create()
+    thr_likelihood: 0.99
+    thr_gs: 90 # km/h
+    likelihood: NULL # Best to leave NULL.
+  graph_set_movement: # ?graph_set_movement()
+    type: "as" #this changes to "as" when doing movement model with wind
+    shape: 6
+    scale: 6
+    method: "gamma"
+    low_speed_fix: 15 # km/h
+    zero_speed_ratio: 1.3
+  graph_add_wind:
+    thr_as: 60 # km/h ONLY USE WHEN WIND DATA IS AVAILABLE. this sets a threshold above which speeds are not considered
+  graph_simulation: # ?graph_simulation()
+    nj: 10
+  pressurepath_create: # ?pressurepath_create()
+    variable: ["altitude", "surface_pressure"]
+    # solar_dep: 0
+  geopressuretemplate: # ?geopressuretemplate()
+    likelihood: ["map_pressure", "map_light"] #what to take into account in the analysis
+    outputs: ["marginal", "most_likely", "simulation"]
+    pressurepath: ["most_likely"] # "geopressureviz"
+
+#ibericus basque country
+4Z04001: #ringnr corresponding to logger CT214
+  #ring_number: "CT214" # Add ring number as parameter
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-07"
+  tag_set_map:
+    extent: [-20, 25, 2, 45]
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: -2.540698
+      known_lat: 42.84231
+  bird_create:
+    scientific_name: "Phylloscopus ibericus"
+
+
+4Z04009: #ringnr corresponding to CT221 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-07"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: -2.548378
+      known_lat: 42.823820
+  bird_create:
+    scientific_name: "Phylloscopus ibericus"
+
+4Z04020: #ringnr corresponding to CT245 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-07"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: -2.5468
+      known_lat: 42.8258
+  bird_create:
+    scientific_name: "Phylloscopus ibericus"
+
+
+4Z04015: #ringnr corresponding to CT234 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-07"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: -2.545
+      known_lat: 42.828
+  bird_create:
+    scientific_name: "Phylloscopus ibericus"
+
+4Z04028: #ringnr corresponding to CT224 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-07"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: -2.549
+      known_lat: 42.825
+  bird_create:
+    scientific_name: "Phylloscopus ibericus"
+
+4Z04030: #ringnr corresponding to CT225 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-07"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: -2.549
+      known_lat: 42.825
+  bird_create:
+    scientific_name: "Phylloscopus ibericus"
+
+4Z04031: #ringnr corresponding to CT207 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-07"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: -2.548
+      known_lat: 42.824
+  bird_create:
+    scientific_name: "Phylloscopus ibericus"
+
+#collybita
+A071903: #ringnr corresponding to CT217 logger #olot
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-3"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: 2.61
+      known_lat: 42.228
+  bird_create:
+    scientific_name: "Phylloscopus collybita"
+
+A071916: #ringnr corresponding to CT194 logger #ribes
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-04-30"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: 2.187
+      known_lat: 42.318
+  bird_create:
+    scientific_name: "Phylloscopus collybita"
+
+
+A071926: #ringnr corresponding to CT190 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-01"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: 2.149
+      known_lat: 42.302
+  bird_create:
+    scientific_name: "Phylloscopus collybita"
+
+
+A071923: #ringnr corresponding to CT250 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-01"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: 2.15
+      known_lat: 42.299
+  bird_create:
+    scientific_name: "Phylloscopus collybita"
+
+A071931: #ringnr corresponding to CT249 logger
+  tag_create:
+    crop_start: "2024-07-15"
+    crop_end: "2025-05-02"
+  tag_set_map:
+    extent: [-20, 25, 2, 45] # [W, E, S, N] for the grid of the final map
+    known:
+      stap_id: [1, -1] #1 is first stopover and -1 is the last one
+      known_lon: 2.155
+      known_lat: 42.290
+  bird_create:
+    scientific_name: "Phylloscopus collybita"
